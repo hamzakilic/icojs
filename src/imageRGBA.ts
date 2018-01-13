@@ -33,14 +33,14 @@ export class ImageRGBA  {
         }
         
         //check if width is in limits
-        if (width <16 || width > 255) {
+        if (width <16 || width > 256) {
             throw  Errors.imageWidthOrHeightIsNotValid;
             
         }
 
         this._width = width;
         //check if height is in limits
-        if (height < 16 || height > 255) {
+        if (height < 16 || height > 256) {
             throw Errors.imageWidthOrHeightIsNotValid;
             
         }
@@ -53,8 +53,10 @@ export class ImageRGBA  {
               this._pixels = pixels;
               else
               {
-                  //set error and return
+                  if(pixels.byteLength<width*height*4)                  
                   throw  Errors.imageDataIsNotValid;
+
+                  this._pixels=pixels.slice(0,width*height*4);
                   
               }
         }

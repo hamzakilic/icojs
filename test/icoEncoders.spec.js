@@ -8,7 +8,8 @@ const expect = chai.expect;
 
 const image = require('../lib/imageRGBA').ImageRGBA;
 const errors = require('../lib/errors').Errors;
-const icoEncoder = require('../lib/icoEncoder').IcoEncoder
+const icoEncoder = require('../lib/icoEncoder').IcoEncoder;
+const icoenc=require('../lib');
 
 const fs = require('fs');
 const bmp=require('bmpimagejs');
@@ -44,14 +45,7 @@ describe('icodecoder',function(done){
                 
              let img  = bmp.decode(buffer);             
              console.log(`file:${fullpath} width:${img.width} height:${img.height}`);
-             let newimg=new image(32,32,undefined);
-             
-             for(let y=0;y<newimg.height;++y)
-             {
-                 let pos=y*img.width*4;
-                 newimg.pixels.set(img.pixels.slice(pos,pos+newimg.width*4),y*newimg.width*4);
-
-             }
+            
              
              let ico=new icoEncoder();
              
@@ -70,9 +64,53 @@ describe('icodecoder',function(done){
         });
         done();
     })
+
+
     
 
    });
+
+
+   it('starting reading files under data folder and try to convert',(done)=>{
+       
+   
+    if (!fs.existsSync(output)) {
+    fs.mkdirSync(output, 0744);
+    }
+       
+    fs.readdir(dirname,function(err,items){
+        
+         
+        if(err)throw err;
+        items.forEach((file)=>{
+            if(file.endsWith(".bmp")){            
+            console.log(`executing file:${file} `);
+            let fullpath=dirname +file;
+             let buffer=fs.readFileSync(fullpath);             
+                
+             let img  = bmp.decode(buffer);             
+             console.log(`file:${fullpath} width:${img.width} height:${img.height}`);            
+             
+             
+             
+             let icobuffer= icoenc.encode(32,img.pixels);
+             console.log(`${icobuffer.byteLength} will written`);
+             
+             
+             
+             
+            }
+
+        });
+        done();
+    })
+
+
+    
+
+   });
+   
+
 
   
 
