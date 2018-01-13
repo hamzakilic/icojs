@@ -1,4 +1,4 @@
-export class DecodeError extends Error{
+export class EncodeError extends Error{
     private _errNumber:number;
     constructor(errno:number,msg:string) {
         super(msg);
@@ -11,15 +11,15 @@ export class Errors {
 
 
     /** global errors */
-    public static readonly undefinedVariable =new DecodeError(1,'undefined variable' );
-    public static readonly indexOutOfRange = new DecodeError(2, 'index out of range' );
+    public static readonly undefinedVariable =new EncodeError(10,'undefined variable' );
+    public static readonly indexOutOfRange = new EncodeError(20, 'index out of range' );
 
 
    
     /** image errors */
-    public static readonly imageDataIsNotValid = new DecodeError(200,'image data buffer is not valid' );
-    public static readonly imageWidthOrHeightIsNotValid =new DecodeError(401, 'image width and height must be 16-24-32-64-128-256' );
-    public static readonly imageWidthOrHeightMustEqual =new DecodeError(402, 'image width and height must be equal' );
+    public static readonly imageDataIsNotValid = new EncodeError(201,'image data buffer is not valid' );
+    public static readonly imageWidthOrHeightIsNotValid =new EncodeError(401, 'image width and height must be 16-24-32-64-128-256' );
+    public static readonly imageWidthOrHeightMustEqual =new EncodeError(402, 'image width and height must be equal' );
     
     
 
