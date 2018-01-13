@@ -1,6 +1,6 @@
 {
   "name": "icoimagejs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "converts a RGBA 32 bit raw image to ico image format",
   "main": "./lib/index.js",
   "scripts": {
