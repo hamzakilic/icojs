@@ -32,7 +32,7 @@ let buf=fs.readFileSync('./test.bmp');<br/>
     console.log(buffferico.length);
     }catch(e){
         console.log(e.errNumber);
-        console.log(e.msg);
+        console.log(e.message);
     }
 
 
